@@ -26,5 +26,8 @@ class ofApp : public ofBaseApp{
     //可変長配列(vector)を定義
     vector<ofVec2f> location; //位置ベクトル
     vector<ofVec2f> velocity; //速度ベクトル
+    
+    //上限値を決める
+    static const int max_num = 100;
 		
 };

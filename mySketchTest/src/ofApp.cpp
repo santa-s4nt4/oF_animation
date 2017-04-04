@@ -18,6 +18,12 @@ void ofApp::update(){
     //新規に位置ベクトルと速度ベクトルを生成し、配列に追加
     location.push_back(ofVec2f(ofGetWidth()/2, ofGetHeight()/2));
     velocity.push_back(ofVec2f(ofRandom(-10, 10), ofRandom(-10, 10)));
+    
+    //もし上限値を超えたら、先頭の要素を削除する
+    if(location.size() > max_num) {
+        location.erase(location.begin());
+        velocity.erase(velocity.begin());
+    }
 
 }
 
@@ -27,8 +33,8 @@ void ofApp::draw(){
     for (int i = 0; i < location.size(); i++) {
         //計算した位置に円を描画
         ofSetColor(15, 127, 255); //円の色
-        ofDrawCircle(location[i], 5); //半径40の円を描画
-        ofDrawCircle(location[i], 5); //半径40の円を描画
+        ofDrawCircle(location[i], 5); //半径5の円を描画
+        ofDrawCircle(location[i], 5); //半径5の円を描画
         
         //画面の端でバウンドするように
         if (location[i].x < 0 || location[i].x > ofGetWidth()) { //画面の左右ではみ出したら
