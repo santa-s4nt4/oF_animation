@@ -6,31 +6,29 @@ void ofApp::setup(){
     ofSetFrameRate(60); //秒間60コマで描画
     ofSetBackgroundColor(0); //背景色を黒に
     
-    //NUM回繰り返し
-    for (int i = 0; i < NUM; i++) {
-        //位置と速度を初期化
-        location[i] = ofVec2f(ofGetWidth()/2, ofGetHeight()/2); //画面の中心に
-        velocity[i] = ofVec2f(ofRandom(-10, 10), ofRandom(-10, 10)); //ランダムな速度で
-    }
-
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     //NUM回繰り返し
-    for (int i = 0; i < NUM; i++) {
+    for (int i = 0; i < location.size(); i++) {
         location[i] += velocity[i]; //速度から位置を更新
     }
+    
+    //新規に位置ベクトルと速度ベクトルを生成し、配列に追加
+    location.push_back(ofVec2f(ofGetWidth()/2, ofGetHeight()/2));
+    velocity.push_back(ofVec2f(ofRandom(-10, 10), ofRandom(-10, 10)));
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     //NUM回繰り返し
-    for (int i = 0; i < NUM; i++) {
+    for (int i = 0; i < location.size(); i++) {
         //計算した位置に円を描画
-        ofSetColor(31, 12, 255); //円の色
-        ofDrawCircle(location[i], 40); //半径40の円を描画
+        ofSetColor(15, 127, 255); //円の色
+        ofDrawCircle(location[i], 5); //半径40の円を描画
+        ofDrawCircle(location[i], 5); //半径40の円を描画
         
         //画面の端でバウンドするように
         if (location[i].x < 0 || location[i].x > ofGetWidth()) { //画面の左右ではみ出したら
@@ -40,6 +38,10 @@ void ofApp::draw(){
             velocity[i].y *= -1; //横向きの速度を反転(バウンド)
         }
     }
+    
+    //現在の物体の数を表示
+    ofSetColor(255);
+    ofDrawBitmapString("num = " + ofToString(location.size()), 20, 20);
 
 }
 

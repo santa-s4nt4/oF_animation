@@ -23,7 +23,8 @@ class ofApp : public ofBaseApp{
     
     static const int NUM = 100; //配列の最大数を定数として定義
     
-    ofVec2f location[NUM]; //NUM個の位置ベクトル
-    ofVec2f velocity[NUM]; //NUM個の速度ベクトル
+    //可変長配列(vector)を定義
+    vector<ofVec2f> location; //位置ベクトル
+    vector<ofVec2f> velocity; //速度ベクトル
 		
 };
