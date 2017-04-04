@@ -6,6 +6,7 @@ void ofApp::setup(){
     ofSetFrameRate(60); //秒間60コマで描画
     ofSetBackgroundColor(0); //背景色を黒に
     
+    max_num = 1000;
 }
 
 //--------------------------------------------------------------
@@ -15,6 +16,7 @@ void ofApp::update(){
         location[i] += velocity[i]; //速度から位置を更新
     }
     
+    /*
     //新規に位置ベクトルと速度ベクトルを生成し、配列に追加
     location.push_back(ofVec2f(ofGetWidth()/2, ofGetHeight()/2));
     velocity.push_back(ofVec2f(ofRandom(-10, 10), ofRandom(-10, 10)));
@@ -24,6 +26,7 @@ void ofApp::update(){
         location.erase(location.begin());
         velocity.erase(velocity.begin());
     }
+     */
 
 }
 
@@ -68,7 +71,15 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+    //新規に位置ベクトルと速度ベクトルを生成し、配列に追加
+    location.push_back(ofVec2f(x, y));
+    velocity.push_back(ofVec2f(ofRandom(-2, 2), ofRandom(-2, 2)));
+    
+    //もし上限値を超えたら、先頭の要素を削除する
+    if(location.size() > max_num){
+        location.erase(location.begin());
+        velocity.erase(velocity.begin());
+    }
 }
 
 //--------------------------------------------------------------

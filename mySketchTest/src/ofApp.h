@@ -28,6 +28,6 @@ class ofApp : public ofBaseApp{
     vector<ofVec2f> velocity; //速度ベクトル
     
     //上限値を決める
-    static const int max_num = 100;
-		
+    int max_num;
+
 };
